@@ -7,7 +7,10 @@ const exibeCliente = (cpf, nome, id) => {
     const conteudoLinha = `
     <td>${cpf}</td>
     <td>${nome}</td>
-    <td><button type="button" onclick="removeCliente(${id})" class="btn btn-danger">Excluir</button></td>
+    <td>
+    <button type="button" onclick="removeCliente(${id})" class="btn btn-danger">Excluir</button>
+    <a class="btn btn-info" href="edita-clientes.html?id=${id}">Editar</a>
+    </td>
     ` ;   
 
     linha.innerHTML = conteudoLinha;
