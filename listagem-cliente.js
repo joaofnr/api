@@ -1,12 +1,13 @@
 const corpoTabela = document.querySelector("[data-conteudo-tabela]");
 
-const exibeCliente = (cpf, nome) => {
+const exibeCliente = (cpf, nome, id) => {
 
     const linha = document.createElement('tr');
 
     const conteudoLinha = `
     <td>${cpf}</td>
     <td>${nome}</td>
+    <td><button type="button" onclick="removeCliente(${id})" class="btn btn-danger">Excluir</button></td>
     ` ;   
 
     linha.innerHTML = conteudoLinha;
@@ -14,8 +15,14 @@ const exibeCliente = (cpf, nome) => {
     return linha;
 }
 
+const removeCliente = id => {
+    if(confirm('Tem certeza de que quer excluir o cliente')){
+        deletaCliente(id);
+    }
+}
+
 listarClientes().then( exibe => {
     exibe.forEach(indice => {
-        corpoTabela.appendChild(exibeCliente(indice.cpf, indice.nome));
+        corpoTabela.appendChild(exibeCliente(indice.cpf, indice.nome, indice.id));
     })
 })
