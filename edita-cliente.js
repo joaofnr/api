@@ -8,6 +8,21 @@ detalhaCliente(id).then(dados => {
     inputNome.value = dados[0].nome;
 })
 
+
+const mensagemSucesso = (mensagem) => {
+    const linha = document.createElement('tr');
+    const conteudoLinha = `<div class="alert alert-success" role="alert">${mensagem}</div>`;   
+    linha.innerHTML = conteudoLinha;
+    return linha;
+}
+
+const mensagemErro = (mensagem) => {
+    const linha = document.createElement('tr');
+    const conteudoLinha = `<div class="alert alert-danger" role="alert">${mensagem}</div>`;   
+    linha.innerHTML = conteudoLinha;
+    return linha;
+}
+
 const formEdicao = document.querySelector("[data-form]");
 formEdicao.addEventListener('submit', event => {
     event.preventDefault();
@@ -15,5 +30,11 @@ formEdicao.addEventListener('submit', event => {
         alert('CPF inválido');
         return;
     }
-    editaCliente(id, inputCPF.value, inputNome.value);
+    editaCliente(id, inputCPF.value, inputNome.value).then(resposta => {
+        if(resposta.status === 200){
+            formEdicao.appendChild(mensagemSucesso('Cliente editado com sucesso'));
+        } else {
+            formEdicao.appendChild(mensagemErro('Erro na edição do cliente'));
+        }
+    });
 })
