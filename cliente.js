@@ -2,14 +2,29 @@ const informacoesClientes = [
     {
         cpf: 00765343088,
         nome: "Ronaldo"
+    },
+    {
+        cpf: 343076588,
+        nome: "Carol"
     }
 ];
 
-const conteudoLinha = `<tr>
-<td>${informacoesClientes[0].cpf}</td>
-<td>${informacoesClientes[0].nome}</td>
-</tr>` ;
-
 const corpoTabela = document.querySelector("[data-conteudo-tabela]");
 
-corpoTabela.innerHTML = conteudoLinha;
+const exibeCliente = (cpf, nome) => {
+
+    const linha = document.createElement('tr');
+
+    const conteudoLinha = `
+    <td>${cpf}</td>
+    <td>${nome}</td>
+    ` ;   
+
+    linha.innerHTML = conteudoLinha;
+
+    return linha;
+}
+
+informacoesClientes.forEach(indice => {
+    corpoTabela.appendChild(exibeCliente(indice.cpf, indice.nome));
+})
